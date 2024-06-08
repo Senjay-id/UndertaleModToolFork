@@ -574,15 +574,15 @@ namespace UndertaleModLib
                 var expectedAddress = GetAddressForUndertaleObject(obj);
                 if (expectedAddress != AbsPosition)
                 {
-                    SubmitWarning("Reading misaligned at " + AbsPosition.ToString("X8") + ", realigning back to " + expectedAddress.ToString("X8") + "\nHIGH RISK OF DATA LOSS! The file is probably corrupted, or uses unsupported features\nProceed at your own risk");
+                    Console.WriteLine($"Reading misaligned at {AbsPosition.ToString("X8")} realigning back to  {expectedAddress.ToString("X8")}");
                     AbsPosition = expectedAddress;
                 }
                 unreadObjects.Remove((uint)AbsPosition);
                 obj.Unserialize(this);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw new UndertaleSerializationException(e.Message + "\nat " + AbsPosition.ToString("X8") + " while reading object " + typeof(T).FullName, e);
+                //throw new UndertaleSerializationException(e.Message + "\nat " + AbsPosition.ToString("X8") + " while reading object " + typeof(T).FullName, e);
             }
         }
 
